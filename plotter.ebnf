@@ -1,0 +1,73 @@
+plot ::= imports space? (chunk )* startingChunkDeclaration
+
+startingChunkDeclaration ::= space? 'mark block' space? identifier space? 'starting' delimiter
+
+chunk ::= blockDeclaration | comment
+
+imports ::= importedstrips importedvars | importedvars importedstrips
+importedstrips ::= IMPORTSTRIPS space? stringlist space? delimiter
+importedvars ::= IMPORTVARIABLES space? stringlist space? delimiter
+
+blockDeclaration ::= DECLAREBLOCK space? identifier space? FROMSTRIP space? string space? ASKING space? string space? WITHANSWERS space? answerList delimiter
+
+
+answerList ::= space? '{' space? answer space? (comma answer)* comma? space? '}' space?
+
+answer ::= space? identifier space? NAMED space? string space? LEADINGTO space? consequencesList
+
+consequencesList ::= '[' space? consequenceDefault (comma consequenceOptional)* comma? ']'
+
+consequenceOptional ::= identifier space? BECAUSE space? booleanOperation consequenceWith? space?
+consequenceDefault ::= identifier space? DEFAULT space? consequenceWith? space?
+
+consequenceWith ::= WITH space? string space? changeOperator space? number
+
+booleanOperation ::= space? booleanOperand space? booleanOperator space? booleanOperand space? | booleanOperand | '(' booleanOperation ')'
+booleanOperand ::= numericalOperation | answerReference
+answerReference ::= identifier '.' identifier
+
+numericalOperation ::= space? numericalOperand space? comparisonOperator space? numericalOperand space? | '(' numericalOperation ')'
+numericalOperand ::= string | number
+
+identifier ::= nondigit (digit | nondigit)*
+
+number                ::= "-"? ("0" | [1-9] [0-9]*) ("." [0-9]+)? (("e" | "E") ( "-" | "+" )? ("0" | [1-9] [0-9]*))?
+
+stringlist ::= string (comma string)* comma?
+
+comma ::= space* ',' space*
+
+string                ::= '"' (([#x20-#x21] | [#x23-#x5B] | [#x5D-#xFFFF]) | #x5C (#x22 | #x5C | #x2F | #x62 | #x66 | #x6E | #x72 | #x74 | #x75 HEXDIG HEXDIG HEXDIG HEXDIG))* '"'
+HEXDIG                ::= [a-fA-F0-9]
+
+
+comparisonOperator::= '>' | '<' | '==' | '!='
+booleanOperator ::= '||' | '&&'
+changeOperator ::= '+' | '-'
+
+digit ::= [0-9]
+
+nondigit ::= [a-zA-Z]
+
+delimiter ::= space? ';' space?
+
+space ::=  [#x20#x09#x0A#x0D]+ | comment   /* Space | Tab | \n | \r */
+
+comment ::= COMMENTSTART (![#x0A#x0D] [#x00-#xFFFF])* EOL
+
+DECLAREBLOCK ::= 'declare block'
+FROMSTRIP ::= 'from strip'
+ASKING ::= 'asking'
+WITHANSWERS ::= 'with answers'
+
+NAMED ::= 'named'
+LEADINGTO ::= 'leading to'
+BECAUSE ::= 'because'
+DEFAULT ::= 'default'
+IMPORTSTRIPS ::= 'import strips'
+IMPORTVARIABLES ::= 'import variables'
+DOT ::= '.'
+COMMENTSTART ::= '--'
+WITH ::= 'with'
+
+EOL         ::= [#x0A#x0D]+|EOF

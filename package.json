@@ -1,0 +1,24 @@
+{
+  "name": "plotter",
+  "version": "1.0.0",
+  "description": "A programming language for dynamic plots in interactive movies or novels",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^11.12.2",
+    "typescript": "^3.3.3333"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ffluffyhedgehog/plotter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ffluffyhedgehog/plotter/issues"
+  },
+  "homepage": "https://github.com/ffluffyhedgehog/plotter#readme"
+}
