@@ -1,4 +1,4 @@
-import { CIRunner } from "./runner";
+import { PlotterStateManipulator } from "./runner";
 import * as util from "util";
 
 const text = `
@@ -36,7 +36,7 @@ with answers {
 
 mark block SomeBlock starting;`;
 
-const l = new CIRunner(text);
+const l = new PlotterStateManipulator(text);
 
 const a = l.getFreshState();
 console.log(util.inspect(a, {showHidden: false, depth: null}));
