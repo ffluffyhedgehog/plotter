@@ -138,13 +138,14 @@ export class PlotterStateManipulator {
       currentBlock: this.convertBlock(this.blocks[this.startingBlock]),
       variables: this.variables.reduce((prev, cur) => (prev[cur] = 0, prev), {}),
       passedAnswers: {},
-      ended: false
+      ended: false,
     }
   }
 
   private convertBlock(block: Block): UserState.CurrentBlock {
     return {
       blockName: block.blockName,
+      stripName: block.stripName,
       question: block.question,
       answers: block.answers.map(el => ({name: el.name, text: el.text}))
     }
@@ -182,8 +183,9 @@ export interface UserState {
 }
 export namespace UserState {
   export class CurrentBlock {
-    blockName: string
-    question: string
+    blockName: string;
+    question: string;
+    stripName: string;
     answers: {name: string, text: string}[];
   }
 }
