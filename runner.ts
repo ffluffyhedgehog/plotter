@@ -61,7 +61,6 @@ export class PlotterStateManipulator {
   }
 
   private processConsequence(state: UserState, con: Consequence) {
-    console.log(con)
     if (con.effect) {
       switch (con.effect.operation) {
         case '+': {

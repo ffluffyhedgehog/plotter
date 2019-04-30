@@ -64,22 +64,18 @@ export class Parser {
   private error(expectedType: string) {
     const token = this.tokens[this.currentToken];
     if (token == this.errorToken) return;
-    console.log(
-      "ERROR: " + token.getType(),
-      " at line " + token.getLine() + ", column " + token.getColumn(),
-      "; Expected " + expectedType
-    );
 
     this.errorToken = token;
     this.errors++;
     throw new Error(
-      "Unexpected token type " + token.getType() + " expected " + expectedType
+      "ERROR: " + token.getType(),
+      " at line " + token.getLine() + ", column " + token.getColumn(),
+      "; Expected " + expectedType
     );
   }
 
   private eatToken(expectedType: string): boolean {
     const actualType = this.token.getType();
-    // console.log(`eat ${actualType} ${this.token.getValue()}` )
     if (expectedType === actualType) {
       this.nextToken();
       return true;
@@ -117,7 +113,6 @@ export class Parser {
     // }
     this.currentToken += 1;
     const actualType = this.token.getType();
-    // console.log(`nextch ${actualType} ${this.token.getValue()}` )
     if (expectedTypes.includes(actualType)) {
       return actualType;
     } else {
@@ -141,7 +136,6 @@ export class Parser {
 
   public parseProgram() {
     this.statements = this.parseStatementList();
-    // console.log(util.inspect(this.statements, {showHidden: false, depth: null}));
     
     const sem = new SemanticChecker(this.statements);
     sem.check();
