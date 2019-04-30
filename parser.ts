@@ -68,9 +68,7 @@ export class Parser {
     this.errorToken = token;
     this.errors++;
     throw new Error(
-      "ERROR: " + token.getType(),
-      " at line " + token.getLine() + ", column " + token.getColumn(),
-      "; Expected " + expectedType
+      `ERROR: ${token.getType()} at line ${token.getLine()}, column ${token.getColumn()}; Expected ${expectedType}`
     );
   }
 
