@@ -28,14 +28,14 @@ export class Lexer {
   }
 
   public allTokens() {
-    let token = this.nextToken();
+    let token;
     let tokens: Token[] = [];
 
-    while (token.getType() !== TokenTypes.EOF) {
-      tokens.push(token);
+    do {
       token = this.nextToken();
+      tokens.push(token);
       // console.log(token)
-    }
+    } while (token.getType() !== TokenTypes.EOF);
 
     return tokens.filter(el => el.getType() !== TokenTypes.CommentStart);
   }
