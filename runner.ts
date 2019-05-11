@@ -20,9 +20,7 @@ import {
   GreaterThanExpression,
   LessThanEqualExpression,
   GreaterThanEqualExpression,
-  Effect,
   AnswerReference,
-  TreeNode
 } from "./ast";
 import * as util from "util";
 
@@ -34,6 +32,9 @@ export class PlotterStateManipulator {
   private program: Statement[];
   private startingBlock: string;
 
+  public get stripsAvailible() {
+    return [...this.strips];
+  }
 
   private error(text) {
     throw new Error(`Error: ${text}`);
