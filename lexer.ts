@@ -411,8 +411,8 @@ export class Lexer {
   recognizeString(): Token {
     let line = this.line;
     let column = this.column;
-    const results = /^["|'][\w ]+["|']/.exec(
-      this.input.substring(this.position)
+    const results = /^["|'][\w .,?!@#$%^&*?><]+["|']/.exec(
+      this.input.substring(this.position),
     );
     if (!results) {
       return new Token(TokenTypes.Unknown, "", line, column);
